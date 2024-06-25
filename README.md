@@ -1,92 +1,96 @@
-# Webpack and Babel Boilerplate
+# Battleship Game
 
-This is a boilerplate template for setting up a single-page application (SPA) using Webpack 5 and Babel. It provides a basic structure and configuration to get you started quickly with modern JavaScript development, including support for ES6+ features and CSS handling.
+This is a JavaScript implementation of the classic Battleship game. The project follows a test-driven development approach, focusing on unit tests and a clean separation of concerns. Below are the detailed steps and functionalities included in the game:
 
-## Features
+## Table of Contents
 
-- **Webpack 5**: Module bundler for modern JavaScript applications.
-- **Babel**: JavaScript compiler to use the latest JavaScript features.
-- **HTML Webpack Plugin**: Simplifies creation of HTML files to serve your bundles.
-- **Webpack Dev Server**: Provides a development server with live reloading.
-- **CSS Handling**: Supports importing CSS files in JavaScript modules.
-- **Environment-Specific Configurations**: Separate configurations for development and production environments.
+1. [Ship Class/Factory](#ship-classfactory)
+2. [Gameboard Class/Factory](#gameboard-classfactory)
+3. [Player Class/Factory](#player-classfactory)
+4. [Game Flow and User Interface](#game-flow-and-user-interface)
+5. [Extra Credit](#extra-credit)
 
-## Project Structure
+## Ship Class/Factory
 
-```
-wp5-boilerplate/
-├── dist/                   # Output directory for bundled files
-├── src/                    # Source directory
-│   ├── index.js            # Entry point for the application
-│   └── index.html          # HTML template
-├── .babelrc                # Babel configuration
-├── package.json            # Project metadata and dependencies
-├── webpack.common.js       # Common Webpack configuration
-├── webpack.dev.js          # Development-specific Webpack configuration
-└── webpack.prod.js         # Production-specific Webpack configuration
-```
+Begin your app by creating the Ship class or factory (your choice).
 
-## Getting Started
+- **Properties**:
+  - `length`: The length of the ship.
+  - `hits`: The number of times the ship has been hit.
+  - `sunk`: Boolean indicating whether the ship has been sunk.
 
-Follow these steps to set up and use the boilerplate:
+- **Methods**:
+  - `hit()`: Increases the number of hits.
+  - `isSunk()`: Calculates whether the ship is sunk based on its length and hits.
 
-### 1. Prerequisites
+_Remember to only test your object’s public interface. Only methods or properties used outside of your ‘ship’ object need unit tests._
 
-Ensure you have Node.js and npm installed on your machine. You can download and install them from [nodejs.org](https://nodejs.org/).
+## Gameboard Class/Factory
 
-### 2. Installation
+Create a Gameboard class or factory.
 
-1. Clone the repository or download the zip file and extract it.
-2. Navigate to the project directory:
-   ```sh
-   cd wp5-boilerplate
-   ```
-3. Install the dependencies:
-   ```sh
-   npm install
-   ```
+- **Note**: There is no User Interface at this stage. Verify functionality using tests, not console logs or DOM methods.
 
-### 3. Development
+- **Methods**:
+  - `placeShip(coordinates)`: Places ships at specific coordinates by calling the ship factory or class.
+  - `receiveAttack(coordinates)`: Determines if the attack hits a ship and sends the `hit` function to the correct ship, or records the coordinates of the missed shot.
+  - `reportAllSunk()`: Reports whether all ships have been sunk.
 
-To start the development server with live reloading:
-```sh
-npm start
-```
+- **Tracking**:
+  - Keeps track of missed attacks to display them properly.
 
-The application will be available at `http://localhost:8080`. The Webpack Dev Server will automatically reload the page when you make changes to the source files.
+## Player Class/Factory
 
-### 4. Production
+Create a Player class or factory.
 
-To build the project for production:
-```sh
-npm run build
-```
+- **Types**:
+  - `Real Player`: Controlled by the user.
+  - `Computer Player`: Controlled by the game logic.
 
-The bundled files will be generated in the `dist` directory. These files are optimized for production and ready to be deployed.
+- **Properties**:
+  - Each player object contains its own Gameboard.
 
-## Customization
+## Game Flow and User Interface
 
-### Babel Configuration
+Import your classes/factories into another file and drive the game using event listeners to interact with your objects. Create a module to manage DOM interactions.
 
-The Babel configuration is defined in the `.babelrc` file. It currently uses the `@babel/preset-env` preset to compile modern JavaScript features.
+### Steps:
 
-### Webpack Configuration
+1. **Setup New Game**:
+   - Create players.
+   - Populate each player’s Gameboard with predetermined coordinates.
 
-The Webpack configuration is split into three files:
-- `webpack.common.js`: Contains the common configuration shared between development and production.
-- `webpack.dev.js`: Contains the configuration specific to the development environment.
-- `webpack.prod.js`: Contains the configuration specific to the production environment.
+2. **Render Gameboards**:
+   - Display both player’s boards using information from the Gameboard class/factory.
+   - Implement methods to render each player’s Gameboard in an appropriate module.
 
-You can modify these files to add more loaders and plugins as needed.
+3. **Game Turn Management**:
+   - Use event listeners to step through the game turn by turn, using only methods from other objects.
+   - Allow users to click on a coordinate in the enemy Gameboard to attack.
+   - Re-render boards to display updated information.
 
-## Contributing
+4. **Player Turns**:
+   - Players take turns attacking the enemy Gameboard.
+   - Manage the current player’s turn within the module.
 
-If you have suggestions for improvements or encounter any issues, please feel free to open an issue or create a pull request.
+5. **Computer Player**:
+   - Implement basic logic for the computer player to make random, legal moves.
 
-## License
+6. **End Game**:
+   - Create conditions to end the game when one player’s ships are all sunk.
 
-This project is licensed under the MIT License.
+### Ship Placement
 
----
+Finish by implementing a system for players to place their ships:
 
-This README provides an overview of the boilerplate, explains its purpose, and gives detailed instructions on how to set up and use it.
+- Allow typing coordinates or using a button to cycle through random placements.
+
+## Extra Credit
+
+Make your Battleship project more impressive by introducing any of these modifications:
+
+- **Drag and Drop**: Implement drag and drop to allow players to place their ships.
+- **2-Player Option**: 
+  - Enable a 2-player mode where users take turns by passing the device or spinning the monitor.
+  - Implement a ‘pass device’ screen to prevent players from seeing each other’s boards.
+- **Improved Computer**: Enhance the computer player's intelligence to try adjacent slots after getting a ‘hit’.
