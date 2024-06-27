@@ -1,9 +1,10 @@
-export default class Ship {
+class Ship {
   constructor(name, length) {
     this.name = name;
     this.length = length;
     this.sunk = false;
     this.hits = 0;
+    this.positions = [];
   }
 
   hit() {
@@ -17,4 +18,10 @@ export default class Ship {
   sink() {
     this.sunk = true;
   }
+
+  addPositions(startPosition, endPosition) {
+    
+  }
 }
+
+module.exports = Ship;

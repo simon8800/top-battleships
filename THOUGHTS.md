@@ -19,4 +19,4 @@ Here is where I document how I approach this project, the blockers I come across
   - But what if it overlaps with another ship?
 - How do I know where my ships are? Do I mark it on the gameboard only or also on the ship?
 - Does the ship need to know where it is?
-  - Yes, being able to know where the ship is will allow me to keep track which parts of the ship are hit and I can return all those positions back to the gameboard...?
+  - Yes, the ship should know where it is

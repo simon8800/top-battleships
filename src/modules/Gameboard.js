@@ -1,10 +1,10 @@
-export default class Gameboard {
+class Gameboard {
   constructor() {
     this.board = Array.from({ length: 10 }, () => Array(10).fill(0));
     this.ships = [];
   }
 
-  // Take coordinates and check if ship has been hit
+  // Take coordinates and check if a ship has been hit
   receiveAttack(x, y) {
     return;
   }
@@ -14,3 +14,5 @@ export default class Gameboard {
     return;
   }
 }
+
+module.exports = Gameboard;
