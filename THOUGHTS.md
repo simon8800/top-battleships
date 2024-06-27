@@ -12,7 +12,7 @@ Here is where I document how I approach this project, the blockers I come across
 
 ## Questions
 
-6/26/24 - Building out Ship and Gameboard classes
+Building out Ship and Gameboard classes
 
 - How do I check if a ship is placed within the gameboard?
   - If a ship's "head" and "tail" are within the rows and columns, then the rest of the ship is within bounds. So I just need to check the head and tail...?
@@ -20,3 +20,10 @@ Here is where I document how I approach this project, the blockers I come across
 - How do I know where my ships are? Do I mark it on the gameboard only or also on the ship?
 - Does the ship need to know where it is?
   - Yes, the ship should know where it is
+- Who should care if there are ship placement collisions?
+  - I've decided that the gameboard will track this
+- How do I mark a position being hit?
+  - Empty space
+  - Ship that hasn't been it
+  - Ship that has been hit
+  - Space without ship that has been hit
