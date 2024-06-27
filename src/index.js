@@ -1,1 +1,3 @@
-console.log("Hello, Webpack and Babel!"); // Log a message to the console
+import Ship from "./modules/Ship";
+import Gameboard from "./modules/Gameboard";
+import Player from "./modules/Player";

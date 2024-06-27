@@ -10,8 +10,16 @@ class Gameboard {
   }
 
   // Add ships to the board as users/computer places them on the board
-  addShip(ship) {
-    return;
+  placeShip(ship, startPosition, endPosition) {
+    this.ships.push(ship);
+    ship.addPositions(startPosition, endPosition);
+    let shipPositions = ship.positions;
+
+    shipPositions.forEach((position) => {
+      this.board[position[0]][position[1]] = ship;
+    });
+
+    return this.board[startPosition[0]][startPosition[1]];
   }
 }
 

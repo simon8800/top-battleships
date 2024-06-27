@@ -19,8 +19,17 @@ class Ship {
     this.sunk = true;
   }
 
+  // Accepts start and end positions and populates ship positions;
   addPositions(startPosition, endPosition) {
-    
+    let startY = startPosition[1];
+    let endY = endPosition[1];
+    let x = startPosition[0];
+
+    for (let y = startY; y <= endY; y++) {
+      let position = [x, y];
+      this.positions.push(position);
+    }
+    return this.positions;
   }
 }
 
