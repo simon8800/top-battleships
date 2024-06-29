@@ -4,10 +4,22 @@ Here is where I document how I approach this project, the blockers I come across
 
 ## Approach
 
+6/29/24 - Getting the hang of testing and covering cases
+
+1. `Ship` class
+  - Move properties to private ✅
+  - Create getters ✅
+2. `Gameboard` class
+  - Check for ship in position ✅
+  - Prevent ships overlapping ✅
+
 6/26/24 - I'm going to start off by following the README instructions which are:
 
 1. Create `Ship` class/factory
+  - Ships can add their positions ✅
 2. Create `Gameboard` class/factory
+  - Place ships on gameboard ✅
+  - Receive attacks ✅
 3. Create `Player` class/factory
 
 ## Questions
@@ -23,7 +35,15 @@ Building out Ship and Gameboard classes
 - Who should care if there are ship placement collisions?
   - I've decided that the gameboard will track this
 - How do I mark a position being hit?
-  - Empty space
-  - Ship that hasn't been it
-  - Ship that has been hit
-  - Space without ship that has been hit
+  - Empty space: 0
+  - Ship that hasn't been it: Ship object
+  - Ship that has been hit: X with Ship?
+  - Space without ship that has been hit: X
+  - I can make this an object with 2 properties
+    - hit: bool
+    - ship: Ship||0
+
+## Learned
+
+- Originally I used `Array.from` and `Array.fill` to create my gameboard, but what happened was that when I used `Array.fill({hit: false, ship: 0})`, it made every row's columns reference the same object. So, if I changed one column, it would change all the columns in that row. I switched to a `for` loop
+- I tried to return early from inside the `forEach` method and realized have two hours that I was working inside a callback. It was not working how I expected it to. Very good lesson here, haha...
