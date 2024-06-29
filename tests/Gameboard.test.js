@@ -78,4 +78,16 @@ describe("Receiving attacks", () => {
     playerBoard.receiveAttack(0, 2);
     expect(playerBoard.receiveAttack(0, 2)).toBeFalsy();
   });
+
+  describe("All ships sunk", () => {
+    test("All ships are sunk", () => {
+      playerBoard.sunkShips = 1;
+      expect(playerBoard.allShipsSunk()).toBeTruthy();
+      playerBoard.sunkShips = 0;
+    });
+
+    test("Not all ships are sunk", () => {
+      expect(playerBoard.allShipsSunk()).toBeFalsy();
+    });
+  });
 });

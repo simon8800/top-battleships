@@ -4,6 +4,7 @@ export default class Gameboard {
   constructor() {
     this.board = this._createBoard();
     this.ships = [];
+    this.sunkShips = 0;
   }
 
   reset() {
@@ -61,6 +62,10 @@ export default class Gameboard {
       if (this.hasShipInPosition(x, y)) return true;
     }
     return false;
+  }
+
+  allShipsSunk() {
+    return this.ships.length === this.sunkShips;
   }
 
   _createBoard() {
