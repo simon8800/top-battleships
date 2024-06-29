@@ -1,4 +1,4 @@
-const Ship = require("../src/modules/Ship");
+import Ship from "../src/modules/Ship";
 
 const carrier = new Ship("carrier", 5);
 const battleship = new Ship("battleship", 4);

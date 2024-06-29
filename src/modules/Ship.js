@@ -1,36 +1,46 @@
-class Ship {
+import { getPositionsBetween } from "./utils";
+
+export default class Ship {
   constructor(name, length) {
-    this.name = name;
-    this.length = length;
-    this.sunk = false;
-    this.hits = 0;
-    this.positions = [];
+    this._name = name;
+    this._length = length;
+    this._sunk = false;
+    this._hits = 0;
+    this._positions = [];
   }
 
   hit() {
-    this.hits += 1;
+    this._hits += 1;
   }
 
   isSunk() {
-    return this.hits === this.length;
+    return this._hits === this._length;
   }
 
   sink() {
-    this.sunk = true;
+    this._sunk = true;
   }
 
   // Accepts start and end positions and populates ship positions;
   addPositions(startPosition, endPosition) {
-    let startY = startPosition[1];
-    let endY = endPosition[1];
-    let x = startPosition[0];
+    this._positions = getPositionsBetween(startPosition, endPosition);
+    return this._positions;
+  }
 
-    for (let y = startY; y <= endY; y++) {
-      let position = [x, y];
-      this.positions.push(position);
-    }
-    return this.positions;
+  // getters and setters
+  get name() {
+    return this._name;
+  }
+
+  get positions() {
+    return this._positions;
+  }
+
+  get hits() {
+    return this._hits;
+  }
+
+  get length() {
+    return this._length;
   }
 }
-
-module.exports = Ship;

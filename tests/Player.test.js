@@ -1,3 +1,3 @@
-const Player = require("../src/modules/Player");
+import Player from "../src/modules/Player";
 
-test.skip('something', () => {});
+test.skip("something", () => {});
