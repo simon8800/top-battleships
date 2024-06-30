@@ -1,3 +1,4 @@
-import Ship from "./modules/Ship";
-import Gameboard from "./modules/Gameboard";
-import Player from "./modules/Player";
+import GameController from "./modules/GameController";
+import "./style.css";
+
+GameController();

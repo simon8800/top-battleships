@@ -1,0 +1,39 @@
+#app {
+  display: flex;
+  justify-content: space-around;
+}
+
+.board {
+  display: grid;
+  height: 450px;
+  width: 450px;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  gap: 3px;
+  padding: 3px;
+  border-radius: 5px;
+  border: 0.15em solid black;
+}
+
+.cell {
+  border-radius: 15px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-size: 2rem;
+  cursor: crosshair;
+  background-color: skyblue;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.hit {
+  background-color: grey;
+}
+
+.ship {
+  background-color: black;
+}
+
+.hit-ship {
+  background-color: red;
+}
