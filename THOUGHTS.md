@@ -4,6 +4,13 @@ Here is where I document how I approach this project, the blockers I come across
 
 ## Approach
 
+6/30/24 - Building the UI
+
+1. I'm going with checkboxes because it inherently has a "checked" property that will help me with marking places that have been hit and that will also help me with logic since I can use the `checked` property
+  - NVM... going to go with divs. I can't figure out how to simulate a click for the CPU to make the check show up. It doesn't do anything...
+2. I'm going to mark empty cells with skyblue, hit but empty with grey, ships with black, and ships that have been hit with red
+3. Now I need to populate each cell with data that corresponds to the indices of `Gameboard`
+
 6/29/24 - Getting the hang of testing and covering cases
 
 1. `Ship` class
@@ -23,6 +30,15 @@ Here is where I document how I approach this project, the blockers I come across
 3. Create `Player` class/factory
 
 ## Questions
+
+What else do I need?
+- GameController module to orchestrate Gameboard, Ship, and Player instances
+  - Waits for all ships to be placed onto the board before the game starts
+  - playRound 
+    - Changes active player 
+    - Gets for active player input
+- GameDisplay module to create elements and interactivity
+  - 
 
 Building out Ship and Gameboard classes
 
