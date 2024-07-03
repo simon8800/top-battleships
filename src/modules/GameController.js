@@ -97,6 +97,7 @@ function processPlayerMove(cellElement) {
   } else {
     markCellAsMiss(cellElement);
   }
+  checkWin();
 }
 
 function markCellAsHit(cell, ship) {
@@ -104,9 +105,6 @@ function markCellAsHit(cell, ship) {
   cell.dataset.ship = JSON.stringify(ship);
   if (ship.isSunk()) {
     sinkShipElements(ship, state.activePlayer.gameboardElement);
-  }
-  if (checkWin()) {
-    endGame();
   }
 }
 
@@ -144,9 +142,11 @@ function checkWin() {
   let cpu = state.cpu.player;
   if (player.gameboard.allShipsSunk()) {
     disableBoard();
+    handleWin(cpu);
     return true;
   } else if (cpu.gameboard.allShipsSunk()) {
     disableBoard();
+    handleWin(player);
     return true;
   }
   return false;
@@ -159,6 +159,20 @@ function disableBoard() {
   }
 }
 
-function endGame() {
-  // let newGame = newGameOverlay();
+function handleWin(winner) {
+  let modal = document.querySelector(".modal");
+  modal.style.display = "block";
+  let header = modal.querySelector("h3");
+  header.innerText = `${winner.name} wins!`;
+  let button = modal.querySelector("button");
+  button.onclick = () => {
+    modal.style.display = "none";
+    clearBoards();
+    GameController();
+  };
+}
+
+function clearBoards() {
+  document.querySelector(".board").remove();
+  document.querySelector(".board").remove();
 }
