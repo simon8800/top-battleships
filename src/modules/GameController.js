@@ -12,7 +12,7 @@ export default function GameController() {
 }
 
 function setupBoard() {
-  let appDiv = document.getElementById("app");
+  let boardDiv = document.querySelector(".boards");
   // Initialize all logic components
   let playerGameboard = new Gameboard();
   let cpuGameboard = new Gameboard();
@@ -30,8 +30,8 @@ function setupBoard() {
   populateCells(state.cpu);
 
   // Add boards to UI
-  appDiv.appendChild(playerGameboardElement);
-  appDiv.appendChild(cpuGameboardElement);
+  boardDiv.appendChild(playerGameboardElement);
+  boardDiv.appendChild(cpuGameboardElement);
 
   return { player, cpu, playerGameboardElement, cpuGameboardElement };
 }
@@ -61,24 +61,41 @@ function populateCells(playerData) {
     if (player.type === "cpu") {
       cell.onclick = () => {
         processPlayerMove(cell);
+        cell.onclick = null;
+        state.activePlayer = state.player;
+        computerMove();
       };
     }
   }
 }
 
-function processPlayerMove(cell) {
+function computerMove() {
+  let cpu = state.cpu.player;
+  let player = state.activePlayer.player;
+  let gameboardElement = state.activePlayer.gameboardElement;
+  let coordinates = cpu.randomHit(player.gameboard);
+  let cellElement = getCellElement(
+    coordinates.row,
+    coordinates.column,
+    gameboardElement
+  );
+  processPlayerMove(cellElement);
+  state.activePlayer = state.cpu;
+}
+
+function processPlayerMove(cellElement) {
   // Attack on logical board
-  let coordinates = JSON.parse(cell.dataset.coordinates);
+  let coordinates = JSON.parse(cellElement.dataset.coordinates);
   let gameboard = state.activePlayer.player.gameboard;
   let position = gameboard.getPosition(coordinates.row, coordinates.column);
   gameboard.receiveAttack(coordinates.row, coordinates.column);
 
   // Handle hit and miss
-  if (cell.dataset.ship && position.ship !== 0) {
+  if (cellElement.dataset.ship && position.ship !== 0) {
     let ship = position.ship;
-    markCellAsHit(cell, ship);
+    markCellAsHit(cellElement, ship);
   } else {
-    markCellAsMiss(cell);
+    markCellAsMiss(cellElement);
   }
 }
 
@@ -87,6 +104,9 @@ function markCellAsHit(cell, ship) {
   cell.dataset.ship = JSON.stringify(ship);
   if (ship.isSunk()) {
     sinkShipElements(ship, state.activePlayer.gameboardElement);
+  }
+  if (checkWin()) {
+    endGame();
   }
 }
 
@@ -119,7 +139,9 @@ function getCellElement(x, y, gameboardElement) {
   return cellElement[0];
 }
 
-function checkWin(player, cpu) {
+function checkWin() {
+  let player = state.player.player;
+  let cpu = state.cpu.player;
   if (player.gameboard.allShipsSunk()) {
     disableBoard();
     return true;
@@ -137,4 +159,6 @@ function disableBoard() {
   }
 }
 
-function endGame() {}
+function endGame() {
+  // let newGame = newGameOverlay();
+}

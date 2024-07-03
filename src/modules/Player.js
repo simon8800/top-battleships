@@ -45,11 +45,12 @@ export default class Player {
 
   randomHit(gameboard) {
     let landHit = false;
-    let coordinates = [];
+    let coordinates = {};
     while (!landHit) {
       let x = this.coordinateGenerator();
       let y = this.coordinateGenerator();
-      coordinates = [x, y];
+      coordinates.row = x;
+      coordinates.column = y;
       landHit = gameboard.receiveAttack(x, y) ? true : false;
     }
 

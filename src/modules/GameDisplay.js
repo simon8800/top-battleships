@@ -1,6 +1,3 @@
-import Gameboard from "./Gameboard";
-import Ship from "./Ship";
-
 // Create cells to place into gameboard
 function cellElementFactory(coordinates, classnameList) {
   let cell = document.createElement("div");
@@ -37,7 +34,6 @@ function gameboardElementFactory(player) {
 
 function newGameOverlay(winner) {
   let appDiv = document.querySelector("#app");
-
   let modal = document.createElement("div");
   modal.classList.add("modal");
 
