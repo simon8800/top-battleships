@@ -4,6 +4,12 @@ Here is where I document how I approach this project, the blockers I come across
 
 ## Approach
 
+7/1/24 - Connecting display and logic
+
+- I want to build the UI depending on what is on the current position in player's gameboard
+  - If there's a ship - mark it, if not leave it blue
+  - To do so, I need to check if there's a ship
+
 6/30/24 - Building the UI
 
 1. I'm going with checkboxes because it inherently has a "checked" property that will help me with marking places that have been hit and that will also help me with logic since I can use the `checked` property
@@ -31,6 +37,10 @@ Here is where I document how I approach this project, the blockers I come across
 
 ## Questions
 
+How to connect backend and frontend?
+- Setup so that clicking a cell reflects on respective gameboard
+- Only change cell if the backend agrees 
+
 What else do I need?
 - GameController module to orchestrate Gameboard, Ship, and Player instances
   - Waits for all ships to be placed onto the board before the game starts
@@ -38,7 +48,7 @@ What else do I need?
     - Changes active player 
     - Gets for active player input
 - GameDisplay module to create elements and interactivity
-  - 
+  - How do I prevent a user from clicking on their own board?
 
 Building out Ship and Gameboard classes
 

@@ -19,7 +19,14 @@ export default class Gameboard {
 
     if (!position["hit"]) {
       position["hit"] = true;
-      if (this.hasShipInPosition(x, y)) position["ship"].hit();
+      if (this.hasShipInPosition(x, y)) {
+        let ship = position["ship"];
+        ship.hit();
+        if (ship.isSunk()) {
+          ship.sink();
+          this.sunkShips += 1;
+        }
+      }
       return true;
     } else {
       return false;
@@ -39,9 +46,10 @@ export default class Gameboard {
 
   // Add ships to the board as users/computer places them on the board
   placeShip(ship, startPosition, endPosition) {
+    if (!this.isWithinBounds(endPosition)) return -1;
     if (this.hasShipBetween(startPosition, endPosition)) return -1;
 
-    this.ships.push(ship);
+    this.addShip(ship);
     ship.addPositions(startPosition, endPosition);
 
     ship.positions.forEach((position) => {
@@ -68,6 +76,17 @@ export default class Gameboard {
     return this.ships.length === this.sunkShips;
   }
 
+  isWithinBounds(endPosition) {
+    let x = endPosition[0];
+    let y = endPosition[1];
+
+    if (x >= 0 && x <= 9 && y >= 0 && y <= 9) {
+      return true;
+    }
+
+    return false;
+  }
+
   _createBoard() {
     let board = [];
 
@@ -81,5 +100,9 @@ export default class Gameboard {
     }
 
     return board;
+  }
+
+  addShip(ship) {
+    this.ships.push(ship);
   }
 }
